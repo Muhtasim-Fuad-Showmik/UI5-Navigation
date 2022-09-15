@@ -1,9 +1,15 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], function (Controller) {
-    "use strict";
-
-    return Controller.extend("sap.ui.demo.nav.controller.Home", {
-
-    });
-});
+	"sap/ui/demo/nav/controller/BaseController"
+ ], function (BaseController) {
+	"use strict";
+ 
+	return BaseController.extend("sap.ui.demo.nav.controller.Home", {
+		onPress: function () {
+            var oRouter = this.getOwnerComponent().getRouter();
+			console.log(oRouter);
+            oRouter.navTo("sample");
+        }
+	});
+	
+ 
+ });

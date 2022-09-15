@@ -72,18 +72,35 @@
 				"controlId": "app",
 				"controlAggregation": "pages",
 				"transition": "slide",
+				"bypassed": {
+					"target": "notFound"
+				},
 				"async": true
 			},
 			"routes": [{
 				"pattern": "",
 				"name": "appHome",
 				"target": "home"
-			}],
+			},
+			{
+				"pattern": "Sample",
+				"name": "sample",
+				"target": "sample"
+			}
+			],
 			"targets": {
 				"home": {
 					"id": "home",
-					"name": "Home",
-					"level": 1
+					"name": "Home"
+				},
+				"sample": {
+					"id": "sample",
+					"name": "Sample"
+				},
+				"notFound": {
+					"id": "notFound",
+					"name": "NotFound",
+					"transition": "show"
 				}
 			}
 		}
