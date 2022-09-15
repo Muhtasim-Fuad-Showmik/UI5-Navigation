@@ -91,7 +91,8 @@
 			"targets": {
 				"home": {
 					"id": "home",
-					"name": "Home"
+					"name": "Home",
+					"level": 1
 				},
 				"sample": {
 					"id": "sample",
@@ -100,7 +101,7 @@
 				"notFound": {
 					"id": "notFound",
 					"name": "NotFound",
-					"transition": "show"
+					"transition": "fade"
 				}
 			}
 		}

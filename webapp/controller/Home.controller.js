@@ -4,12 +4,15 @@ sap.ui.define([
 	"use strict";
  
 	return BaseController.extend("sap.ui.demo.nav.controller.Home", {
-		onPress: function () {
-            var oRouter = this.getOwnerComponent().getRouter();
-			console.log(oRouter);
-            oRouter.navTo("sample");
-        }
+		onDisplayNotFound: function () {
+			// display the "notFound" target without changing the hash.
+			// Note: This is not navTo and therefore does not navigate to the page and only
+			// displays the page without ever changing the hash.
+			// this.getRouter().getTargets().display("notFound");
+
+			this.getRouter().getTargets().display("notFound", {
+				fromTarget: "home"
+			});
+		}
 	});
-	
- 
  });
