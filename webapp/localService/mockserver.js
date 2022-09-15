@@ -33,12 +33,10 @@ sap.ui.define([
 					});
 
 					// simulate
-					var sPath = sap.ui.require.toUrl("sap/ui/demo/nav/localService");
-					oMockServer.simulate(sPath + "/metadata.xml", sPath + "/mockdata");
 
-					// oMockServer.simulate(sMetadataUrl, {
-					// 	sMockdataBaseUrl: sJsonFilesUrl
-					// });
+					oMockServer.simulate(sMetadataUrl, {
+						sMockdataBaseUrl: sJsonFilesUrl
+					});
 
 					// start
 					oMockServer.start();
