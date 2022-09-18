@@ -17,20 +17,41 @@ sap.ui.define([
 
     return BaseController.extend("sap.ui.demo.nav.controller.employee.overview.EmployeeOverviewContent", {
         onInit: function () {
+            var oRouter = this.getRouter();
+
             this._oTable = this.byId("employeesTable");
             this._oVSD = null;
             this._sSortField = null;
             this._bSortDescending = false;
             this._aValidSortFields = ["EmployeeID", "FirstName", "LastName"];
             this.sSearchQuery = null;
+            this._oRouteArgs = null;
+
             this._initViewSettingsDialog();
+
+            // make the search bookmarkable
+            oRouter.getRoute("employeeOverview").attachMatched(this._onRouteMatched, this);
+        },
+        _onRouteMatched: function (oEvent) {
+            // save the current query state
+            this._oRouterArgs = oEvent.getParameter("arguments");
+            this._oRouterArgs["?query"] = this._oRouterArgs["?query"] || {};
+
+            // search/filter via URL hash
+            this._applySearchFilter(this._oRouterArgs["?query"].search);
         },
         onSortButtonPressed: function () {
             this._oVSD.open();
         },
         onSearchEmployeesTable: function (oEvent) {
-            this._applySearchFilter(oEvent.getSource().getValue());
+            var oRouter = this.getRouter();
+            // Update the hash with the current search term
+            this._oRouterArgs["?query"].search = oEvent.getSource().getValue();
+            oRouter.navTo("employeeOverview", this._oRouterArgs, true /* no history */);
+
+            // this._applySearchFilter(oEvent.getSource().getValue());
         },
+
         _initViewSettingsDialog: function () {
             this._oVSD = new ViewSettingsDialog("vsd", {
                 confirm: function (oEvent) {
@@ -58,6 +79,7 @@ sap.ui.define([
                 selected: false
             }));
         },
+        
         _applySearchFilter: function (sSearchQuery) {
             var aFilters, oFilter, oBinding;
 
@@ -82,6 +104,7 @@ sap.ui.define([
             oBinding = this._oTable.getBinding("items");
             oBinding.filter(oFilter, "Application");
         },
+
         /**
 		 * Applies sorting on our table control.
 		 * @param {string} sSortField		the name of the field used for sorting
@@ -118,6 +141,7 @@ sap.ui.define([
                 oBinding.sort(oSorter);
             }
         },
+
         _syncViewSettingsDialogSorter: function (sSortField, bSortDescending) {
             // the possible keys are: "EmployeeID" | "FirstName" | "LastName"
             // Note: no input validation is implemented here
