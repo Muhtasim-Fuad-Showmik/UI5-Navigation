@@ -98,7 +98,7 @@
 				"target": "employee"
 			},
 			{
-				"pattern": "employees/{employeeId}/resume",
+				"pattern": "employees/{employeeId}/resume:?query:",
 				"name": "employeeResume",
 				"target": "employeeResume"
 			}],
@@ -118,7 +118,7 @@
 					"transition": "fade"
 				},
 				"employees": {
-					"id": "employees",
+					"id": "employeeList",
 					"path": "sap.ui.demo.nav.view.employee",
 					"name": "EmployeeList",
 					"level": 2
